@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<launch>
+
+<!-- Create some static tfs to develop our tf tree for testing -->
+
+<node pkg="tf2_ros" type="static_transform_publisher" name="world_to_map_tf" args="0 0 0 0 0 0 world table_map" />
+
+<!-- BEGIN ROBOT 1-->
+  <group ns="sparki1">
+    <param name="tf_prefix" value="sparki1_tf" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_sparki_tf" args="1 1 0 0 0 0 table_map sparki1" />
+  </group>
+
+<!-- BEGIN ROBOT 2-->
+  <group ns="sparki2">
+    <param name="tf_prefix" value="sparki2_tf" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_sparki_tf" args="2 1 0 1.570795 0 0 table_map sparki2" />
+  </group>
+
+<!-- BEGIN ROBOT 3-->
+  <group ns="sparki3">
+    <param name="tf_prefix" value="sparki3_tf" />
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_sparki_tf" args="0.25 1.5 0 -0.7853975 0 0 table_map sparki3" />
+  </group>
+
+
+
+</launch>
