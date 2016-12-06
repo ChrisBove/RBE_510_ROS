@@ -103,10 +103,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES sparki_field_computer
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs tf2
-#  DEPENDS system_lib
+  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs tf2
+  DEPENDS system_lib
 )
 
 ###########
@@ -117,6 +117,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,15 +133,16 @@ include_directories(
 
 ## Declare a C++ executable
 # add_executable(sparki_field_computer_node src/sparki_field_computer_node.cpp)
+add_executable(sparki_field_computer_node src/sparki_field.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 # add_dependencies(sparki_field_computer_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(sparki_field_computer_node
-#   ${catkin_LIBRARIES}
-# )
+target_link_libraries(sparki_field_computer_node
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
