@@ -10,7 +10,7 @@ Provides a ROS wrapper for the WPI RBE 580 course utilizing the Sparki Robots
 Clone this repo into your catkin workspace. Build with catkin_make, and make sure your workspace devel/setup.bash has been sourced.
 
 ## Running
-We provide an RVIZ configuration for quickly viewing the pertinent information available on the field. Using the 2D Nav Goal button will send the pose stamped message on the `/robot/goal` topic.
+We provide an RVIZ configuration for quickly viewing the pertinent information available on the field. Using the 2D Nav Goal button will send the pose stamped message on the `/robot/goal` topic. Also note the information that will eventually be available in this implementation: field camera image, occupancy grid map, tf data, and entity marker array.
 ```
 roslaunch sparki_bringup rviz_field.launch
 ```
