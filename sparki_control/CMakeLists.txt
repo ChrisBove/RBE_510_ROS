@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   tf2
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -103,10 +104,10 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES sparki_control
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs tf2
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES sparki_pid main
+  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs tf2 tf
+  DEPENDS system_lib
 )
 
 ###########
@@ -117,6 +118,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -132,6 +134,7 @@ include_directories(
 
 ## Declare a C++ executable
 # add_executable(sparki_control_node src/sparki_control_node.cpp)
+add_executable(sparki_pid_node src/main.cpp src/sparki_pid.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -141,6 +144,10 @@ include_directories(
 # target_link_libraries(sparki_control_node
 #   ${catkin_LIBRARIES}
 # )
+
+target_link_libraries(sparki_pid_node
+    ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
@@ -157,11 +164,11 @@ include_directories(
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS sparki_control sparki_control_node
-#   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+install(TARGETS sparki_pid_node
+   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
 
 ## Mark cpp header files for installation
 # install(DIRECTORY include/${PROJECT_NAME}/
