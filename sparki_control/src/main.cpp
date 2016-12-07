@@ -7,6 +7,7 @@
 #include <iostream>
 
 using namespace std;
+using namespace SparkiControl;
 
 int main(int argc, char* argv[]) {
     ros::init(argc, argv, "Sparki_PID");

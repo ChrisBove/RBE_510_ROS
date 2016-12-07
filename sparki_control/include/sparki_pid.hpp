@@ -10,6 +10,7 @@
 using namespace std;
 using namespace ros;
 
+namespace SparkiControl {
     class SparkiPID {
     private:
         tf2_ros::TransformBroadcaster m_broadcaster;
@@ -20,5 +21,5 @@ using namespace ros;
         SparkiPID(string name);
         void publishMessage();
     };
-
+}
 #endif

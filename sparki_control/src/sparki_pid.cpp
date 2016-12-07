@@ -4,6 +4,8 @@
 
 #include <sparki_pid.hpp>
 
+using namespace SparkiControl;
+
 SparkiPID::SparkiPID(string name) {
     m_counter = 0;
     m_node = new NodeHandle("pid");

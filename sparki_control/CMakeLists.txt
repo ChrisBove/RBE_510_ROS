@@ -134,7 +134,7 @@ include_directories(
 
 ## Declare a C++ executable
 # add_executable(sparki_control_node src/sparki_control_node.cpp)
-add_executable(sparki_pid_node src/main.cpp src/sparki_pid.cpp)
+add_executable(sparki_pid_node src/main.cpp src/sparki_pid.cpp src/PID.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
