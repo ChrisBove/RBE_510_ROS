@@ -46,7 +46,7 @@ void SparkiPID::DisconnectSubscribers() {
 }
 
 void SparkiPID::AdvertisePublishers(string name) {
-    m_publisher = m_node->advertise<geometry_msgs::TwistStamped>(name+"/twist", 10);
+    m_publisher = m_node->advertise<geometry_msgs::TwistStamped>("cmd_vel", 10);
 }
 
 void SparkiPID::UnAdvertisePublishers() {
