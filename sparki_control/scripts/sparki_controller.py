@@ -7,7 +7,7 @@ from geometry_msgs.msg import TwistStamped
 class SparkiController:
     def __init__(self):
         self.node = rospy.init_node('controller')
-        rospy.Subscriber("pid/cmd_vel", TwistStamped, self.callback)
+        rospy.Subscriber("cmd_vel", TwistStamped, self.callback)
         rospy.spin()
 
     def callback(self, data):

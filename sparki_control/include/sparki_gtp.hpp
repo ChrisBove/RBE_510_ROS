@@ -7,12 +7,13 @@
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Pose2D.h>
 #include <string>
+#include <geometry_msgs/PointStamped.h>
 
 using namespace std;
 using namespace ros;
 
 namespace SparkiControl {
-    class SparkiPID {
+    class SparkiGTP {
     private:
         tf2_ros::TransformBroadcaster m_broadcaster;
         NodeHandle* m_node;
@@ -23,15 +24,15 @@ namespace SparkiControl {
     private: // Lifecycle methods
         void ConnectSubscribers();
         void DisconnectSubscribers();
-        void AdvertisePublishers(string name);
+        void AdvertisePublishers();
         void UnAdvertisePublishers();
 
     private: // Callbacks
-        void poseCallback(const geometry_msgs::Pose2DConstPtr& message);
+        void poseCallback(const geometry_msgs::PointStampedConstPtr& message);
 
     public:
-        SparkiPID(string name);
-        ~SparkiPID();
+        SparkiGTP();
+        ~SparkiGTP();
 
         void publishMessage(geometry_msgs::TwistStampedConstPtr twist);
     };

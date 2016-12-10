@@ -2,11 +2,12 @@
 // Created by carlh on 12/6/16.
 //
 
-#include <sparki_pid.hpp>
+#include <sparki_gtp.hpp>
+#include <geometry_msgs/PointStamped.h>
 
 using namespace SparkiControl;
 
-void SparkiPID::poseCallback(const geometry_msgs::Pose2DConstPtr &message) {
+void SparkiGTP::poseCallback(const geometry_msgs::PointStampedConstPtr& message) {
     ROS_INFO("Updating Pose");
     geometry_msgs::TwistStamped twist;
     // TODO - Twist will actually be created by the real PID
@@ -21,39 +22,39 @@ void SparkiPID::poseCallback(const geometry_msgs::Pose2DConstPtr &message) {
     publishMessage(ptr);
 }
 
-SparkiPID::SparkiPID(string name) {
-    ROS_INFO("Initializing SparkiPID");
+SparkiGTP::SparkiGTP() {
+    ROS_INFO("Initializing SparkiGTP");
     m_counter = 0;
-    m_node = new NodeHandle(name);
+    m_node = new NodeHandle();
     ConnectSubscribers();
-    AdvertisePublishers(name);
-    ROS_INFO("SparkiPID is ready");
+    AdvertisePublishers();
+    ROS_INFO("SparkiGTP is ready");
 }
 
-SparkiPID::~SparkiPID() {
+SparkiGTP::~SparkiGTP() {
     ROS_INFO("Destroying the PID");
     DisconnectSubscribers(); // Probably don't need this?  I think it'll automatically unsubscribe when this goes out of scope.
     UnAdvertisePublishers();
     m_node->shutdown();
 }
 
-void SparkiPID::ConnectSubscribers() {
-    m_poseSubscriber = m_node->subscribe<geometry_msgs::Pose2D>("robot_pose", 10, &SparkiPID::poseCallback, this);
+void SparkiGTP::ConnectSubscribers() {
+    m_poseSubscriber = m_node->subscribe<geometry_msgs::PointStamped>("go_to_point", 10, &SparkiGTP::poseCallback, this);
 }
 
-void SparkiPID::DisconnectSubscribers() {
+void SparkiGTP::DisconnectSubscribers() {
     m_poseSubscriber.shutdown();
 }
 
-void SparkiPID::AdvertisePublishers(string name) {
+void SparkiGTP::AdvertisePublishers() {
     m_publisher = m_node->advertise<geometry_msgs::TwistStamped>("cmd_vel", 10);
 }
 
-void SparkiPID::UnAdvertisePublishers() {
+void SparkiGTP::UnAdvertisePublishers() {
     m_publisher.shutdown();
 }
 
-void SparkiPID::publishMessage(geometry_msgs::TwistStampedConstPtr twist) {
+void SparkiGTP::publishMessage(geometry_msgs::TwistStampedConstPtr twist) {
     if (m_node->ok()) {
         ROS_INFO("Publishing twist: %i", m_counter++);
         m_publisher.publish(twist);
