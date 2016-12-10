@@ -28,4 +28,9 @@
     <node pkg="sparki_control" type="sparki_controller.py" name="sparki_controller_3" />
   </group>
 
+  <!-- TEST CLIENT -->
+  <group ns="client">
+    <node pkg="sparki_client_example" type="sparki_client_example" name="TestClient" />
+  </group>
+
 </launch>
