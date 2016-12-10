@@ -2,13 +2,18 @@
 // Created by carlh on 12/6/16.
 //
 
-#include <sparki_gtp.hpp>
-#include <geometry_msgs/PointStamped.h>
+#include <sparki_set_pose.hpp>
+#include <PID.h>
 
 using namespace SparkiControl;
 
-void SparkiGTP::poseCallback(const geometry_msgs::PointStampedConstPtr& message) {
-    ROS_INFO("Updating Pose");
+static PID pid(0.01, 0.005, 0.00005);
+
+void SparkiSetPose::poseCallback(const geometry_msgs::PoseStampedConstPtr& poseStamped) {
+    ROS_INFO("Updating Pose\n");
+    float err = pid.update(1);
+
+
     geometry_msgs::TwistStamped twist;
     // TODO - Twist will actually be created by the real PID
     twist.twist.angular.x = 1.0;
@@ -22,39 +27,39 @@ void SparkiGTP::poseCallback(const geometry_msgs::PointStampedConstPtr& message)
     publishMessage(ptr);
 }
 
-SparkiGTP::SparkiGTP() {
-    ROS_INFO("Initializing SparkiGTP");
+SparkiSetPose::SparkiSetPose() {
+    ROS_INFO("Initializing SparkiSetPose");
     m_counter = 0;
     m_node = new NodeHandle();
     ConnectSubscribers();
     AdvertisePublishers();
-    ROS_INFO("SparkiGTP is ready");
+    ROS_INFO("SparkiSetPose is ready");
 }
 
-SparkiGTP::~SparkiGTP() {
+SparkiSetPose::~SparkiSetPose() {
     ROS_INFO("Destroying the PID");
     DisconnectSubscribers(); // Probably don't need this?  I think it'll automatically unsubscribe when this goes out of scope.
     UnAdvertisePublishers();
     m_node->shutdown();
 }
 
-void SparkiGTP::ConnectSubscribers() {
-    m_poseSubscriber = m_node->subscribe<geometry_msgs::PointStamped>("go_to_point", 10, &SparkiGTP::poseCallback, this);
+void SparkiSetPose::ConnectSubscribers() {
+    m_poseSubscriber = m_node->subscribe<geometry_msgs::PoseStamped>("set_pose", 10, &SparkiSetPose::poseCallback, this);
 }
 
-void SparkiGTP::DisconnectSubscribers() {
+void SparkiSetPose::DisconnectSubscribers() {
     m_poseSubscriber.shutdown();
 }
 
-void SparkiGTP::AdvertisePublishers() {
+void SparkiSetPose::AdvertisePublishers() {
     m_publisher = m_node->advertise<geometry_msgs::TwistStamped>("cmd_vel", 10);
 }
 
-void SparkiGTP::UnAdvertisePublishers() {
+void SparkiSetPose::UnAdvertisePublishers() {
     m_publisher.shutdown();
 }
 
-void SparkiGTP::publishMessage(geometry_msgs::TwistStampedConstPtr twist) {
+void SparkiSetPose::publishMessage(geometry_msgs::TwistStampedConstPtr twist) {
     if (m_node->ok()) {
         ROS_INFO("Publishing twist: %i", m_counter++);
         m_publisher.publish(twist);

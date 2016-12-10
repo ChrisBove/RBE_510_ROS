@@ -5,6 +5,7 @@
 #include <sparki_client_example.h>
 #include <ros/ros.h>
 #include <geometry_msgs/PointStamped.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <vector>
 #include <string>
 
@@ -18,19 +19,14 @@ int main(int argc, char* argv[]) {
 
     for (size_t i = 0; i < NUM_SPARKIS; i++) {
         std::stringstream topicName;
-        topicName << SPARKI_PREFIX << i+1 << "/go_to_point";
-        publishers.push_back(node.advertise<geometry_msgs::PointStamped>(topicName.str(), 10));
+        topicName << SPARKI_PREFIX << i+1 << "/set_pose";
+        publishers.push_back(node.advertise<geometry_msgs::PoseStamped>(topicName.str(), 10));
     }
 
     ros::Rate rate(1);
     while (ros::ok()) {
         for (size_t i = 0; i < NUM_SPARKIS; i++) {
-            geometry_msgs::PointStamped point;
-            point.header.stamp = ros::Time::now();
-            point.point.x = 100;
-            point.point.y = 200;
-            point.point.x = 0;
-            publishers[i].publish(point);
+            // Configure and publish a PoseStamped message
         }
         ros::spinOnce();
         rate.sleep();

@@ -123,7 +123,8 @@ Visualization Manager:
     - Class: rviz/SetInitialPose
       Topic: /initialpose
     - Class: rviz/SetGoal
-      Topic: /robot/goal
+      Topic: /sparki1/set_pose
+      Title: Set Sparki 1 Goal
     - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point

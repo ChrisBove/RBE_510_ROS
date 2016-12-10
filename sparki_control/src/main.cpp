@@ -3,7 +3,7 @@
 //
 
 #include <ros/ros.h>
-#include <sparki_gtp.hpp>
+#include <sparki_set_pose.hpp>
 #include <geometry_msgs/PointStamped.h>
 
 using namespace std;
@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     //Publisher pub = nodeHandle.advertise<geometry_msgs::PointStamped>("go_to_point", 10);
 
     // Some RAII here, acquiring the pid hooks up hooks up its messages and gets it ready to rock-and-roll
-    SparkiGTP gotopoint;
+    SparkiSetPose gotopoint;
     ros::Rate rate(10);
     while(ros::ok()) {
         ros::spinOnce();

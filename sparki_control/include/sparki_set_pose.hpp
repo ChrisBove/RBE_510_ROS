@@ -6,6 +6,7 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <geometry_msgs/TwistStamped.h>
 #include <geometry_msgs/Pose2D.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <string>
 #include <geometry_msgs/PointStamped.h>
 
@@ -13,7 +14,7 @@ using namespace std;
 using namespace ros;
 
 namespace SparkiControl {
-    class SparkiGTP {
+    class SparkiSetPose {
     private:
         tf2_ros::TransformBroadcaster m_broadcaster;
         NodeHandle* m_node;
@@ -28,11 +29,11 @@ namespace SparkiControl {
         void UnAdvertisePublishers();
 
     private: // Callbacks
-        void poseCallback(const geometry_msgs::PointStampedConstPtr& message);
+        void poseCallback(const geometry_msgs::PoseStampedConstPtr& message);
 
     public:
-        SparkiGTP();
-        ~SparkiGTP();
+        SparkiSetPose();
+        ~SparkiSetPose();
 
         void publishMessage(geometry_msgs::TwistStampedConstPtr twist);
     };
