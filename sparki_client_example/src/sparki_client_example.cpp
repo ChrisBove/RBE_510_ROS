@@ -26,7 +26,8 @@ int main(int argc, char* argv[]) {
     ros::Rate rate(1);
     while (ros::ok()) {
         for (size_t i = 0; i < NUM_SPARKIS; i++) {
-            // Configure and publish a PoseStamped message
+            // This is where you would run your path planning algorithm.  Each sparki publishes a /tf message
+            // which can be used in your A* (for example) algorithm to guide your Sparki to its destination.
         }
         ros::spinOnce();
         rate.sleep();
