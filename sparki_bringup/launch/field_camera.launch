@@ -8,14 +8,15 @@
         <param name="pixel_format" value="mjpeg" />
         <param name="camera_frame_id" value="usb_cam" />
         <param name="camera_info_url" type="string" value="package://sparki_bringup/data/calibration_data/ost.yaml" />
+        <param name="camera_name" type="string" value="usb_cam" />
 
-		<remap from="/usb_cam/image_raw" to="/image_raw"/>
-		<remap from="/usb_cam/camera_info" to="/camera_info"/>
+		<remap from="/usb_cam/image_raw" to="image_color"/>
+		<remap from="/usb_cam/camera_info" to="camera_info"/>
 
     </node>
 
 
-	<node name="image_proc" pkg="image_proc" type = "image_proc" />
+	<!-- <node name="image_proc" pkg="image_proc" type = "image_proc" /> -->
 </group>
 
 </launch>
