@@ -10,7 +10,7 @@ Provides a ROS wrapper for the WPI RBE 580 course utilizing the Sparki Robots
 Install the dependencies (newer distros of ROS may work, but this was tested on Ubuntu 14.04 with Indigo):
 ```
 sudo apt-get install ros-indigo-desktop-full
-sudo apt-get install ros-indigo-usb-cam ros-indigo-image-proc ros-indigo-camera-calibration
+sudo apt-get install ros-indigo-usb-cam ros-indigo-image-proc ros-indigo-camera-calibration ros-indigo-aruco ros-indigo-ar-track-alvar
 ```
 
 Clone this repo into your catkin workspace. Build with catkin_make, and make sure your workspace devel/setup.bash has been sourced.
