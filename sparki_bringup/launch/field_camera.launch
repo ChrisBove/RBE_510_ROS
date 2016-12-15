@@ -16,7 +16,7 @@
     </node>
 
 
-	<!-- <node name="image_proc" pkg="image_proc" type = "image_proc" /> -->
+	<node name="image_proc" pkg="image_proc" type="image_proc" ns="usb_cam"/>
 </group>
 
 </launch>
