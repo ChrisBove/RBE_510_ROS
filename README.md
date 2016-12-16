@@ -1,5 +1,5 @@
 # RBE_580_ROS
-Provides a ROS wrapper for the WPI RBE 580 course utilizing the Sparki Robots
+Provides a ROS implementation for the WPI RBE 580 course utilizing the Sparki Robots. In this configuration, a Logitech webcam observes a table with the Sparki robots on top, equipped with AR Tags.
 
 ## Packages
 * sparki_field_computer - ROS interface for Sparki field computer.
